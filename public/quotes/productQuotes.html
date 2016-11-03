@@ -1,0 +1,199 @@
+<div class="row" ng-controller="quotesController">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-6" style="padding-top: 30px">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center" style="color: #2e6da4">Product details</h2>
+                </div>
+                <div class="panel-body" style="font-size: smaller">
+                    <div class="col-md-3">
+                        <p><strong>Overhaul limit:</strong>{{currentProduct.overhaul_limit}}</p>
+                        <p><strong>Life limit:</strong>{{currentProduct.life_limit}}</p>
+                        <p><strong>Full PIN:</strong>{{currentProduct.pin_length}}</p>
+                    </div>
+                    <div class="col-md-9">
+                        <p><strong>Description:</strong>{{currentProduct.description}}</p>
+                        <p><strong>List Price:</strong>{{currentProduct.price}}</p>
+                        <p><strong>List year:</strong>{{currentProduct.list_year}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6" style="padding-top: 30px">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center" style="color: #2e6da4">Service details</h2>
+                </div>
+                <div class="panel-body" style="font-size: smaller">
+                    <div class="col-md-6">
+                        <p><strong>Average overhaul time:</strong>30 days</p>
+                        <p><strong>Average overhaul price:</strong>$5,000</p>
+                        <p><strong>Average repair time:</strong>10 days</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Average repair price:</strong>$1,300</p>
+                        <p><strong>Average benchtest time:</strong>2 days</p>
+                        <p><strong>Average benchtest price:</strong>$2,310</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+        EXISTING QUOTES
+        !-->
+        <h4 class="text-center">Quotes</h4>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <th>Type</th>
+                <th>Condition</th>
+                <th>Price</th>
+                <th>Company</th>
+                <th>S/N</th>
+                <th>CSN</th>
+                <th>CSO</th>
+                <th>TSN</th>
+                <th>TSO</th>
+                <th>DLOH</th>
+                <th>Quantity</th>
+                <th>Tag date</th>
+                <th>Tag type</th>
+                <th>Source</th>
+                <th>Trace</th>
+                <th>MS/N</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="quote in quotes">
+                    <td>{{quote.type}}</td>
+                    <td>{{quote.condition}}</td>
+                    <td>{{quote.price}}</td>
+                    <td>{{quote.company}}</td>
+                    <td>123-569</td>
+                    <td>50,000</td>
+                    <td>2,760</td>
+                    <td></td>
+                    <td></td>
+                    <td>10/2012</td>
+                    <td>{{quote.quantity}}</td>
+                    <td>8/2006</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!--OUR QUOTES!-->
+        <div class="col-md-6 col-md-offset-3" ng-if="isAddMode()">
+            <h4 class="text-center">Our quote</h4>
+            <md-input-container class="md-block">
+                <label>Quote Type</label>
+                <md-select name="type" ng-model="quote.type" >
+                    <md-option value="CRFQ">Client RFQ</md-option>
+                    <md-option value="COFF">Client Offer</md-option>
+                    <md-option value="VRFQ">Vendor RFQ</md-option>
+                    <md-option value="VOFF">Vendor Offer</md-option>
+                </md-select>
+            </md-input-container>
+            <div layout="row">
+                <md-input-container flex="50">
+                    <label>Price</label>
+                    <input  ng-model="quote.price">
+                </md-input-container>
+
+                <md-input-container flex="50">
+                    <label>Condition</label>
+                    <md-select name="condition" ng-model="quote.condition" >
+                        <md-option value="AR">AR</md-option>
+                        <md-option value="SV">SV</md-option>
+                        <md-option value="OH">OH</md-option>
+                        <md-option value="NEW">NEW</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <div layout="row">
+                <md-input-container flex="30">
+                    <label>Tag date</label>
+                    <input  ng-model="quote.tag_date">
+                </md-input-container>
+
+                <md-input-container flex="30">
+                    <label>Tag type</label>
+                    <input ng-model="quote.tag_type">
+                </md-input-container>
+
+                <md-input-container flex="40">
+                    <label>Tag source</label>
+                    <input ng-model="quote.tag_source">
+                </md-input-container>
+
+            </div>
+
+            <div layout="row">
+                <md-input-container flex="50">
+                    <label>Quantity</label>
+                    <input type="number" name="pinlen" ng-model="quote.quantity">
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>Pin length</label>
+                    <input type="number" name="pinlen" ng-model="quote.pin_length">
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>Lead-time (days)</label>
+                    <input type="number" name="leadtime" ng-model="quote.leadtime">
+                </md-input-container>
+            </div>
+
+            <div layout="row">
+                <md-input-container flex="25">
+                    <label>TSN</label>
+                    <input type="number" name="TSN" ng-model="quote.tsn">
+                </md-input-container>
+
+                <md-input-container flex="25">
+                    <label>TSO</label>
+                    <input type="number" name="TSO" ng-model="quote.tso">
+                </md-input-container>
+
+                <md-input-container flex="25">
+                    <label>CSN</label>
+                    <input type="number" name="CSN" ng-model="quote.csn">
+                </md-input-container>
+
+                <md-input-container flex="25">
+                    <label>CSO</label>
+                    <input type="number" name="CSO" ng-model="quote.cso">
+                </md-input-container>
+            </div>
+            <md-input-container class="md-block">
+                <label>Comments</label>
+                <textarea ng-model="quote.comments" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
+
+            <div class="text-center" >
+                <button class="btn btn-success" ng-click="saveQuote()">Save Quote</button>
+                <button class="btn btn-primary" ng-click="cancelQuote()">Cancel</button>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-md-offset-3" ng-if="!isAddMode()">
+            <div ng-repeat="cm in quotes[0].comments">
+                <p style="font-size: x-small">{{cm.date}}</p>
+                <span>{{cm.text}}</span>
+                <hr>
+            </div>
+
+            <md-input-container class="md-block">
+                <label>Comments</label>
+                <textarea ng-model="quote.comments" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
+
+            <div class="text-center" >
+                <button class="btn btn-success" ng-click="addComment()">Add comment</button>
+                <button class="btn btn-primary" ng-click="cancelQuote()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="container" ng-controller="crudProductsController" >
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3" style="margin-top: 60px">
+            <form name="addProductForm" novalidate>
+                <md-input-container class="md-block">
+                    <label>Part Number</label>
+                    <input  ng-model="product.part_number" required>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Price</label>
+                    <input  ng-model="product.price" type="number">
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Year</label>
+                    <input  ng-model="product.year" type="number">
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Description</label>
+                    <input  ng-model="product.description">
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Aircraft</label>
+                    <input  ng-model="product.aircraft">
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Part Type</label>
+                    <input  ng-model="product.part_type">
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Manufacturer</label>
+                    <input  ng-model="product.manufacturer">
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Pin Length</label>
+                    <input  ng-model="product.pin_length">
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>OHL</label>
+                    <input  ng-model="product.ohl" type="number">
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Life Limit</label>
+                    <input  ng-model="product.lifeLimit" type="number">
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>NHA</label>
+                    <input  ng-model="product.nha">
+                </md-input-container>
+            </form>
+            <!--<button class="btn btn-block btn-primary" ng-click="goToProduct()">Next</button>!-->
+            <div class="text-center">
+                <button ng-disabled="addProductForm.$invalid" class="btn btn-success" ng-click="addProduct(product)" ng-if="!editMode">Add Product</button>
+                <button ng-disabled="addProductForm.$invalid" class="btn btn-success" ng-click="editProduct(product)" ng-if="editMode">Edit Product</button>
+                <button class="btn btn-fail" ng-click="cancel()">Cancel</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<br>
+</div>
