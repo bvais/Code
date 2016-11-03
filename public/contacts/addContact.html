@@ -1,0 +1,70 @@
+<div class="container" ng-controller="crudContactsController" >
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3" style="margin-top: 60px">
+            <form name="addContactForm" novalidate>
+                <md-autocomplete class="md-block" required
+                                 md-input-name="autocompleteField"
+                                 md-no-cache="noCache"
+                                 md-selected-item="selectedCompany"
+                                 md-search-text="contact.company"
+                                 md-items="item in querySearch(contact.company)"
+                                 md-item-text="item.company"
+                                 md-floating-label="Company"
+                                 md-menu-class="autocomplete-custom-template">
+                    <md-item-template>
+                        <span class="item-title">
+                                <span> {{item.company}} </span>
+                        </span>
+                    </md-item-template>
+                </md-autocomplete>
+
+                <md-autocomplete class="md-block" required
+                                 md-input-name="autocompleteField"
+                                 md-no-cache="noCache"
+                                 md-selected-item="selectedContact"
+                                 md-search-text="contact.name"
+                                 md-items="item in contactSearch(contact.name)"
+                                 md-item-text="item.name"
+                                 md-floating-label="Name"
+                                 md-selected-item-change="selectedName(item)"
+                                 md-menu-class="autocomplete-custom-template">
+                    <md-item-template>
+                        <span class="item-title">
+                                <span> {{item.name}} </span>
+                        </span>
+                        <span class="item-metadata">
+                                <span class="item-metastat">
+                                    <strong>Company:</strong> {{item.company}}
+                                </span>
+                            </span>
+                    </md-item-template>
+                </md-autocomplete>
+
+                <md-input-container class="md-block">
+                    <label>Emails</label>
+                    <input  ng-model="contact.email" required>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Phone</label>
+                    <input  required ng-model="contact.phone">
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Social</label>
+                    <input  ng-model="contact.social">
+                </md-input-container>
+            </form>
+
+            <div class="text-center">
+                <button ng-disabled="addContactForm.$invalid" class="btn btn-success" ng-click="addContact(contact)" ng-if="!editMode">Add Contact</button>
+                <button ng-disabled="addContactForm.$invalid" class="btn btn-success" ng-click="editContact(contact)" ng-if="editMode">Edit Contact</button>
+                <button class="btn btn-fail" ng-click="cancel()">Cancel</button>
+            </div>
+            </div>
+
+
+        </div>
+    </div>
+    <br>
+</div>
