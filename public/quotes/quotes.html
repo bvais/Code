@@ -1,0 +1,60 @@
+<div ng-controller="showQuotesController" layout="column" ng-cloak ng-init="oppsLoaded()">
+    <div class="container">
+        <div class="row mainGrid">
+            <div class="form-group col-md-10" style="padding: 0px;">
+                <form ng-submit="search()">
+
+                    <div layout="row">
+                        <!--<md-input-container flex="90">
+                            <label>Search for Opportunities</label>
+                            <input name="partno" ng-model="data.searchText">
+                        </md-input-container>!-->
+                        <md-autocomplete flex="90"
+                                         md-input-name="autocompleteOpps"
+                                         md-input-minlength="2"
+                                         md-input-maxlength="18"
+                                         md-no-cache="noCache"
+                                         md-selected-item="selectedItem"
+                                         md-search-text="data.searchText"
+                                         md-items="item in queryOpps(data.searchText)"
+                                         md-item-text="item.part_number"
+                                         md-floating-label="Search for Quotes"
+                                         md-menu-class="autocomplete-custom-template">
+                            <md-item-template>
+                                <!--<span md-highlight-text="data.searchText">{{item.display}}</span>!-->
+                                <span class="item-title">
+                                    <md-icon md-svg-icon="fa-gears" class="fa fa-gears"></md-icon>
+                                    <span> {{item.part_number}} </span>
+                                </span>
+                                <span class="item-metadata">
+                                    <span class="item-metastat">
+                                        <strong>Description:</strong> {{item.description}}
+                                    </span>
+                                </span>
+                            </md-item-template>
+                        </md-autocomplete>
+
+                        <md-button type="submit" class="md-icon-button" aria-label="search" style="position: relative; top: 15px">
+                            <md-icon md-font-icon="fa-search" class="fa fa-search"></md-icon>
+                        </md-button>
+
+                        <a type="button" class="btn btn-default" style="float: right;height: 50%; position: relative;top: 17px" href="#/addcontact">Add Quote</a>
+                    </div>
+                </form>
+            </div>
+
+        </div><!-- /.row -->
+
+        <div class="row">
+            <div id="grid1" ui-grid="gridOptions" class="myOppsGrid" ui-grid-resize-columns
+                 ui-grid-pagination ui-grid-move-columns ui-grid-selection ui-grid-exporter></div>
+        </div>
+        <div class="row text-center" style="margin-top: 10px">
+            <button class="btn btn-primary" ng-disabled="getCurrentPage() ==1" ng-click="goPrevious()">Previous</button>
+            <span class="label label-info">{{getCurrentPage()}}/{{getTotalPages()}}</span>
+            <button class="btn btn-primary" ng-disabled="getCurrentPage() == getTotalPages()" ng-click="goNext()">Next</button>
+        </div>
+
+    </div>
+</div>
+
