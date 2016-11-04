@@ -24,17 +24,19 @@
 
                 <md-input-container class="md-block">
                     <label>Aircraft</label>
-                    <input  ng-model="product.aircraft">
+                    <input  ng-model="product.aircraft" required>
                 </md-input-container>
 
                 <md-input-container class="md-block">
                     <label>Part Type</label>
-                    <input  ng-model="product.part_type">
+                    <input  ng-model="product.part_type" required>
                 </md-input-container>
 
                 <md-input-container class="md-block">
                     <label>Manufacturer</label>
-                    <input  ng-model="product.manufacturer">
+                    <md-select name="condition" ng-model="product.manufacturer" required>
+                        <md-option ng-repeat="mfr in manufacturers" value="{{mfr.id}}">{{mfr.name}}</md-option>
+                    </md-select>
                 </md-input-container>
 
                 <md-input-container class="md-block">

@@ -2,6 +2,7 @@ angular.module('crmApp')
 .factory('productsDataService', ['$http', '$q', function ($http, $q){
 
     var products = [];
+    var manufacturers = [];
 
     function initProducts() {
         var dfd = $q.defer();
@@ -21,6 +22,22 @@ angular.module('crmApp')
 
     function getProducts() {
         return products;
+    }
+
+    function getManufacturers() {
+        var dfd = $q.defer();
+        if (manufacturers.length == 0) {
+            $http.get('/manufacturer', {cache: true})
+                .success(function(data) {
+                    manufacturers = data;
+                    dfd.resolve(manufacturers);
+                })
+        }
+        else {
+            dfd.resolve(manufacturers);
+        }
+
+        return dfd.promise;
     }
 
     function addProduct(product) {
@@ -47,12 +64,7 @@ angular.module('crmApp')
     }
 
     function editProduct(product) {
-        for(var i = 0; i < products.length; i++) {
-            if (products[i].id == product.id) {
-                products[i] = product;
-                break;
-            }
-        }
+        return $http.put('/product/' + product.id, product);
     }
 
     return {
@@ -60,6 +72,7 @@ angular.module('crmApp')
         getProducts: getProducts,
         addProduct: addProduct,
         getProduct: getProduct,
-        editProduct: editProduct
+        editProduct: editProduct,
+        getManufacturers: getManufacturers
    }
 }]);

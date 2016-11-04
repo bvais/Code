@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var contacts = require('./routes/contact');
 var products = require('./routes/product');
 var quotes = require('./routes/quote');
+var mfr = require('./routes/manufacturer');
 
 var app = express();
 
@@ -19,7 +20,9 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use('/contact', contacts);
 app.use('/product', products);
 app.use('/quote', quotes);
+app.use('/manufacturer', mfr);
 
 
 
-app.listen(8080);
+console.log("listening on port 3000");
+app.listen(3000);

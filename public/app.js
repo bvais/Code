@@ -25,7 +25,7 @@ angular.module('crmApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'ui.grid', 'ui.
             return activePageService.activePage == page ? "active" : "";
         }
         else
-            return "zaza";
+            return "disableInput";
     }
 }]);
 

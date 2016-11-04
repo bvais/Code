@@ -4,11 +4,17 @@ angular.module('crmApp')
 
     $scope.product = {};
     $scope.editMode = false;
+    $scope.manufacturers = [];
 
     if ($routeParams.id != null) {
         $scope.product = productsDataService.getProduct($routeParams.id);
         $scope.editMode = true;
     }
+
+    productsDataService.getManufacturers()
+        .then(function(data) {
+            $scope.manufacturers = data;
+        });
 
     $scope.addProduct = function(product) {
         productsDataService.addProduct(product)
