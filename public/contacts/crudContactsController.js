@@ -1,6 +1,6 @@
 angular.module('crmApp')
-.controller('crudContactsController', ['$scope', '$location', 'autoCompleteService', 'contactsDataService', 'activePageService', '$routeParams',
-    function($scope, $location, autoCompleteService, contactsDataService, activePageService, $routeParams) {
+.controller('crudContactsController', ['$scope', '$location', 'autoCompleteService', 'contactsDataService', 'activePageService', '$routeParams', 'quotesService',
+    function($scope, $location, autoCompleteService, contactsDataService, activePageService, $routeParams, quotesService) {
 
     $scope.contact = {};
     $scope.editMode = false;
@@ -65,6 +65,7 @@ angular.module('crmApp')
     };
 
     $scope.cancel = function() {
+        quotesService.addMode = false;
         $location.path('/quotes');
     }
 }]);

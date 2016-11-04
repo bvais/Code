@@ -17,11 +17,15 @@ angular.module('crmApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'ui.grid', 'ui.
     $routeProvider.when('/quotes/:id', {templateUrl: "quotes/productQuotes.html"});
     $routeProvider.otherwise({templateUrl: "quotes/quotes.html"});
 })
-.controller('mainCtrl', ['$scope', '$http', 'activePageService',
-    function ($scope, $http, activePageService) {
+.controller('mainCtrl', ['$scope', '$http', 'activePageService', 'quotesService',
+    function ($scope, $http, activePageService, quotesService) {
 
     $scope.isActive = function(page) {
-        return activePageService.activePage == page ? "active" : "";
+        if (!quotesService.addMode) {
+            return activePageService.activePage == page ? "active" : "";
+        }
+        else
+            return "zaza";
     }
 }]);
 

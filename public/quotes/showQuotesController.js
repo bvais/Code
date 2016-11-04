@@ -3,9 +3,9 @@
  */
 angular.module("crmApp")
 .controller("showQuotesController", ['$scope', 'contactsDataService', 'quotesDataService', '$location', 'activePageService',
-    'productsDataService', 'autoCompleteService',
+    'productsDataService', 'autoCompleteService', 'quotesService',
     function ($scope, contactsDataService, quotesDataService, $location, activePageService,
-              productsDataService, autoCompleteService) {
+              productsDataService, autoCompleteService, quotesService) {
 
         $scope.currentPage = 1;
         $scope.data = {};
@@ -108,6 +108,11 @@ angular.module("crmApp")
         $scope.serviceGridApi.pagination.previousPage();
         $scope.currentPage = $scope.serviceGridApi.pagination.getPage();
     };
+
+    $scope.addQuote = function() {
+        quotesService.addMode = true;
+        $location.path('/addcontact');
+    }
 
     selectedOpp = function (opp) {
         quotesService.quotes.length = 0;

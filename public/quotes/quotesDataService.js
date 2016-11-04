@@ -1,5 +1,5 @@
 angular.module('crmApp')
-.factory('quotesDataService', ['$http', '$q', function ($http, $q) {
+.factory('quotesDataService', ['$http', '$q', 'quotesService', function ($http, $q, quotesService) {
 
     var quotes = [];
 
@@ -23,6 +23,7 @@ angular.module('crmApp')
         return $http.post('/quote', quote)
             .then(function(data) {
                 quote.id = data.data.insertId;
+                quotesService.addMode = false;
                 quotes.push(quote);
             })
             .catch(function(err) {
