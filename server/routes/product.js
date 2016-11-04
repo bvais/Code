@@ -24,13 +24,13 @@ productRouter.route('/')
                 'type_id': req.body['part_type'],
                 'a_id': req.body['aircraft'],
                 'm_id': req.body['manufacturer'],
-                'price': req.body['price'],
+                'price': req.body['price'] != null ? req.body['price'] : 0,
                 'pin_length': req.body['pin_length'],
                 'nha': req.body['nha'],
                 'description': req.body['description'],
-                'overhaul_limit': req.body['ohl'],
-                'list_year': req.body['year'],
-                'life_limit': req.body['lifeLimit']}) + ");";
+                'overhaul_limit': req.body['ohl'] != null ? req.body['ohl'] : 0,
+                'list_year': req.body['year'] != null ? req.body['year'] : 0,
+                'life_limit': req.body['lifeLimit'] != null ? req.body['lifeLimit'] : 0}) + ");";
 
         conn.query(query,
             function(err, rows) {

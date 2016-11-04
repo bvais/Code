@@ -65,7 +65,10 @@ angular.module('crmApp')
     };
 
     $scope.cancel = function() {
-        quotesService.addMode = false;
-        $location.path('/quotes');
+        if (quotesService.addMode == true) {
+            quotesService.addMode = false;
+            $location.path('/quotes');
+        }
+        else $location.path('/contacts');
     }
 }]);
