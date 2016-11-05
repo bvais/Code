@@ -7,6 +7,8 @@ var contacts = require('./routes/contact');
 var products = require('./routes/product');
 var quotes = require('./routes/quote');
 var mfr = require('./routes/manufacturer');
+var air = require('./routes/aircraft');
+var ptype = require('./routes/part_type');
 
 var app = express();
 
@@ -21,6 +23,8 @@ app.use('/contact', contacts);
 app.use('/product', products);
 app.use('/quote', quotes);
 app.use('/manufacturer', mfr);
+app.use('/aircraft', air);
+app.use('/ptype', ptype);
 
 
 

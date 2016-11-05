@@ -3,6 +3,8 @@ angular.module('crmApp')
 
     var products = [];
     var manufacturers = [];
+    var aircrafts = [];
+    var types = [];
 
     function initProducts() {
         var dfd = $q.defer();
@@ -40,10 +42,43 @@ angular.module('crmApp')
         return dfd.promise;
     }
 
+    function getAircrafts() {
+        var dfd = $q.defer();
+        if (aircrafts.length == 0) {
+            $http.get('/aircraft', {cache: true})
+                .success(function(data) {
+                    aircrafts = data;
+                    dfd.resolve(aircrafts);
+                })
+        }
+        else {
+            dfd.resolve(aircrafts);
+        }
+
+        return dfd.promise;
+    }
+
+    function getTypes() {
+        var dfd = $q.defer();
+        if (types.length == 0) {
+            $http.get('/ptype', {cache: true})
+                .success(function(data) {
+                    types= data;
+                    dfd.resolve(types);
+                })
+        }
+        else {
+            dfd.resolve(types);
+        }
+
+        return dfd.promise;
+    }
+
     function addProduct(product) {
         return $http.post('/product', product)
             .then(function(data) {
                 product.id = data.data[0][0].returnID;
+                product.aircraft = getAircraft(product.aircraft_id).name;
                 products.push(product);
             })
             .catch(function(err) {
@@ -63,6 +98,18 @@ angular.module('crmApp')
         return product;
     }
 
+    function getAircraft(id) {
+        var air = {};
+        for(var i = 0; i < aircrafts.length; i++) {
+            if (aircrafts[i].id == id) {
+                air = aircrafts[i];
+                break;
+            }
+        }
+
+        return air;
+    }
+
     function editProduct(product) {
         return $http.put('/product/' + product.id, product);
     }
@@ -73,6 +120,8 @@ angular.module('crmApp')
         addProduct: addProduct,
         getProduct: getProduct,
         editProduct: editProduct,
-        getManufacturers: getManufacturers
+        getManufacturers: getManufacturers,
+        getAircrafts: getAircrafts,
+        getTypes: getTypes
    }
 }]);

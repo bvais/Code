@@ -5,6 +5,8 @@ angular.module('crmApp')
     $scope.product = {};
     $scope.editMode = false;
     $scope.manufacturers = [];
+    $scope.aircrafts = [];
+    $scope.types = [];
 
     if ($routeParams.id != null) {
         $scope.product = productsDataService.getProduct($routeParams.id);
@@ -14,7 +16,20 @@ angular.module('crmApp')
     productsDataService.getManufacturers()
         .then(function(data) {
             $scope.manufacturers = data;
-        });
+        }
+    );
+
+    productsDataService.getAircrafts()
+        .then(function(data) {
+                $scope.aircrafts = data;
+        }
+    );
+
+    productsDataService.getTypes()
+        .then(function(data) {
+                $scope.types = data;
+        }
+    );
 
     $scope.addProduct = function(product) {
         productsDataService.addProduct(product)
