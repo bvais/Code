@@ -110,6 +110,30 @@ angular.module('crmApp')
         return air;
     }
 
+    function getType(id) {
+        var tp = {};
+        for(var i = 0; i < types.length; i++) {
+            if (types[i].id == id) {
+                tp = types[i];
+                break;
+            }
+        }
+
+        return tp;
+    }
+
+    function getManufacturer(id) {
+        var mf = {};
+        for(var i = 0; i < manufacturers.length; i++) {
+            if (manufacturers[i].id == id) {
+                mf = manufacturers[i];
+                break;
+            }
+        }
+
+        return mf;
+    }
+
     function editProduct(product) {
         return $http.put('/product/' + product.id, product);
     }
@@ -122,6 +146,9 @@ angular.module('crmApp')
         editProduct: editProduct,
         getManufacturers: getManufacturers,
         getAircrafts: getAircrafts,
-        getTypes: getTypes
+        getTypes: getTypes,
+        getType: getType,
+        getAircraft: getAircraft,
+        getManufacturer: getManufacturer
    }
 }]);

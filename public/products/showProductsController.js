@@ -9,6 +9,20 @@ angular.module("crmApp")
 
         $scope.currentPage = 1;
         $scope.data = {};
+        $scope.columns = [
+            {field: 'id', visible: false},
+            { field: 'part_number', enableColumnMenu: false },
+            { field: 'price', enableColumnMenu: false, cellFilter: 'currency'},
+            { field: 'description', enableColumnMenu: false},
+            {field: 'aircraft', enableColumnMenu: false},
+            {field: 'part_type', enableColumnMenu: false},
+            {field: 'pin_length', enableColumnMenu: false},
+            {field: 'nha', enableColumnMenu: false}
+            /*{field: '  ', enableColumnMenu: false,
+                cellTemplate: '<div style="text-align:center;" class="ui-grid-cell-contents"><a href="#/productquotes/{{row.entity.id}}">Quotes</a></div>'},
+            {field: ' ', enableColumnMenu: false,
+                cellTemplate: '<div style="text-align:center;" class="ui-grid-cell-contents"><a href="#/product/{{row.entity.id}}">Edit</a></div>'}*/
+        ];
 
         //initialize the grid in the scope
         $scope.gridOptions = {
@@ -21,27 +35,14 @@ angular.module("crmApp")
             exporterMenuPdf: false,
             enableSelectAll: true,
             paginationPageSize: 100,
-            columnDefs: [
-                {field: 'id', visible: false},
-                { field: 'part_number', enableColumnMenu: false },
-                { field: 'price', enableColumnMenu: false, cellFilter: 'currency'},
-                { field: 'description', enableColumnMenu: false},
-                {field: 'aircraft', enableColumnMenu: false},
-                {field: 'part_type', enableColumnMenu: false},
-                {field: 'pin_length', enableColumnMenu: false},
-                {field: 'nha', enableColumnMenu: false},
-                {field: '  ', enableColumnMenu: false,
-                    cellTemplate: '<div style="text-align:center;" class="ui-grid-cell-contents"><a href="#/productquotes/{{row.entity.id}}">Quotes</a></div>'},
-                {field: ' ', enableColumnMenu: false,
-                    cellTemplate: '<div style="text-align:center;" class="ui-grid-cell-contents"><a href="#/product/{{row.entity.id}}">Edit</a></div>'}
-            ],
+            columnDefs: $scope.columns,
             onRegisterApi: function( gridApi ) {
                 $scope.serviceGridApi = gridApi;
                 $scope.serviceGridApi.grid.registerRowsProcessor(singleFilter, 200 );
 
-                /*$scope.serviceGridApi.selection.on.rowSelectionChanged(null,function(row){
+                $scope.serviceGridApi.selection.on.rowSelectionChanged(null,function(row){
                     productSelected(row.entity);
-                });*/
+                });
             }
         };
 
@@ -121,7 +122,7 @@ angular.module("crmApp")
         productSelected = function (product) {
             if (!quotesService.addMode) {
                 //if I'm not adding a quote go to edit
-                $location.path('/editproduct/' + product.id);
+                $location.path('/product/' + product.id);
             }
             else {
                 //otherwise go to add quote

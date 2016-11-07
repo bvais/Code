@@ -9,7 +9,7 @@
 
                 <md-input-container class="md-block">
                     <label>Aircraft</label>
-                    <md-select name="aircraft" ng-model="product.aircraft_id" required>
+                    <md-select name="aircraft" ng-model="product.aircraft_id">
                         <md-option ng-repeat="air in aircrafts" value="{{air.id}}">{{air.name}}</md-option>
                     </md-select>
                 </md-input-container>
@@ -31,14 +31,14 @@
 
                 <md-input-container class="md-block">
                     <label>Part Type</label>
-                    <md-select name="aircraft" ng-model="product.part_type" required>
+                    <md-select name="aircraft" ng-model="product.part_type_id">
                         <md-option ng-repeat="tp in types" value="{{tp.id}}">{{tp.name}}</md-option>
                     </md-select>
                 </md-input-container>
 
                 <md-input-container class="md-block">
                     <label>Manufacturer</label>
-                    <md-select name="manufacturer" ng-model="product.manufacturer" required>
+                    <md-select name="manufacturer" ng-model="product.manufacturer_id">
                         <md-option ng-repeat="mfr in manufacturers" value="{{mfr.id}}">{{mfr.name}}</md-option>
                     </md-select>
                 </md-input-container>

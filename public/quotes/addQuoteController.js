@@ -9,7 +9,7 @@ angular.module("crmApp")
             return quotesService.addMode;
         };
 
-        if ($routeParams.id != null) {
+        /*if ($routeParams.id != null) {
             var allProducts = productsDataService.getProducts();
 
             for(var j = 0; j < allProducts.length; j++) {
@@ -18,7 +18,7 @@ angular.module("crmApp")
                     break;
                 }
             }
-        }
+        }*/
 
         $http.get('/quote/product/' + $scope.currentProduct.id)
             .success(function(data) {

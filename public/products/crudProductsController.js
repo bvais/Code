@@ -44,8 +44,17 @@ angular.module('crmApp')
     };
 
     $scope.editProduct = function(product) {
+        //the product I get here has the correct a_id, part_type_id and m_id but NOT the correct strings
+        product.manufacturer = productsDataService.getManufacturer(product.manufacturer_id).name;
+        product.part_type = productsDataService.getType(product.part_type_id).name;
+        product.aircraft = productsDataService.getAircraft(product.aircraft_id).name;
+
         productsDataService.editProduct(product);
         $location.path('/products');
         toastr.success('Updated ' + product.part_number);
+    }
+
+    $scope.cancel = function () {
+        $location.path('/products');
     }
 }]);
