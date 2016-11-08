@@ -68,18 +68,18 @@
                     <td>{{quote.condition}}</td>
                     <td>{{quote.price}}</td>
                     <td>{{quote.company}}</td>
-                    <td>123-569</td>
-                    <td>50,000</td>
-                    <td>2,760</td>
+                    <td>{{quote.serial}}</td>
+                    <td>{{quote.CSN}}</td>
+                    <td>{{quote.CSO}}</td>
+                    <td>{{quote.TSN}}</td>
+                    <td>{{quote.TSO}}</td>
                     <td></td>
-                    <td></td>
-                    <td>10/2012</td>
                     <td>{{quote.quantity}}</td>
-                    <td>8/2006</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{quote.tag_date}}</td>
+                    <td>{{quote.tag_type}}</td>
+                    <td>{{quote.tag_source}}</td>
+                    <td>{{quote.trace}}</td>
+                    <td>{{quote.msn}}</td>
                 </tr>
             </tbody>
         </table>
@@ -115,6 +115,23 @@
 
             <div layout="row">
                 <md-input-container flex="30">
+                    <label>S/N</label>
+                    <input  ng-model="quote.serial">
+                </md-input-container>
+
+                <md-input-container flex="30">
+                    <label>MS/N</label>
+                    <input ng-model="quote.msn">
+                </md-input-container>
+
+                <md-input-container flex="40">
+                    <label>Trace</label>
+                    <input ng-model="quote.trace">
+                </md-input-container>
+            </div>
+
+            <div layout="row">
+                <md-input-container flex="30">
                     <label>Tag date</label>
                     <input  ng-model="quote.tag_date">
                 </md-input-container>
@@ -128,7 +145,6 @@
                     <label>Tag source</label>
                     <input ng-model="quote.tag_source">
                 </md-input-container>
-
             </div>
 
             <div layout="row">
@@ -179,14 +195,16 @@
         </div>
 
         <div class="col-md-6 col-md-offset-3" ng-if="!isAddMode()">
-            <div ng-repeat="cm in quotes[0].comments">
+            <h4 class="text-center">Comments</h4>
+
+            <div ng-repeat="cm in comments">
                 <p style="font-size: x-small">{{cm.date}}</p>
-                <span>{{cm.text}}</span>
+                <span>{{cm.comment}}</span>
                 <hr>
             </div>
 
             <md-input-container class="md-block">
-                <label>Comments</label>
+                <label>New comment</label>
                 <textarea ng-model="quote.comments" md-maxlength="150" rows="5" md-select-on-focus></textarea>
             </md-input-container>
 

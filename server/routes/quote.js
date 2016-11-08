@@ -47,4 +47,32 @@ quoteRouter.route('/product/:id')
         );
     });
 
+quoteRouter.route('/comments/:id')
+//gets all products
+    .get(function(req, res) {
+        conn.query('CALL sp_getQuoteComments(' + req.params.id + ');',
+            function(err,rows){
+                if(err) throw err;
+
+                res.json(rows[0]);
+            }
+        );
+    });
+
+quoteRouter.route('/comments/')
+//gets all products
+    .post(function(req, res) {
+        var compile = _.template("<%= quote_id %>, '<%= comment %>'");
+        var query = 'CALL sp_addQuoteComment(' + compile({'quote_id': req.body['quote_id'],
+                'comment': req.body['comment']}) + ");";
+
+        conn.query(query,
+            function(err, rows) {
+                if (err) throw err;
+
+                res.json(rows);
+            }
+        );
+    });
+
 module.exports = quoteRouter;

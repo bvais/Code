@@ -7,14 +7,13 @@ angular.module('crmApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'ui.grid', 'ui.
     $routeProvider.when('/contacts', {templateUrl: "contacts/contacts.html"});
     $routeProvider.when('/products', {templateUrl: "products/products.html"});
     $routeProvider.when('/services', {templateUrl: 'views/services.html'});
-    $routeProvider.when('/quotes', {templateUrl: 'quotes/quotes.html'});
     $routeProvider.when('/addcontact', {templateUrl: 'contacts/addContact.html'});
     $routeProvider.when('/editcontact/:id', {templateUrl: 'contacts/addContact.html'});
     $routeProvider.when('/addproduct', {templateUrl: 'products/addProduct.html'});
     $routeProvider.when('/product/:id', {templateUrl: 'products/addProduct.html'});
-    $routeProvider.when('/productquotes', {templateUrl: "quotes/productQuotes.html"});
-    $routeProvider.when('/productquotes/:id', {templateUrl: "quotes/productQuotes.html"});
-    $routeProvider.when('/quotes/:id', {templateUrl: "quotes/productQuotes.html"});
+    /*$routeProvider.when('/productquotes', {templateUrl: "quotes/productQuotes.html"});*/
+    $routeProvider.when('/productquotes/:pid/:qid?', {templateUrl: "quotes/productQuotes.html"});
+    /*$routeProvider.when('/quotes/:id', {templateUrl: "quotes/productQuotes.html"});*/
     $routeProvider.otherwise({templateUrl: "quotes/quotes.html"});
 })
 .controller('mainCtrl', ['$scope', '$http', 'activePageService', 'quotesService',

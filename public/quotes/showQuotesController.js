@@ -9,6 +9,7 @@ angular.module("crmApp")
 
         $scope.currentPage = 1;
         $scope.data = {};
+        var that = this;
 
         $scope.gridOptions = {
             enableRowSelection: true,
@@ -38,7 +39,7 @@ angular.module("crmApp")
                 $scope.serviceGridApi = gridApi;
                 $scope.serviceGridApi.grid.registerRowsProcessor(singleFilter, 200 );
                 $scope.serviceGridApi.selection.on.rowSelectionChanged(null,function(row){
-                    selectedOpp(row.entity);
+                    that.selectedOpp(row.entity);
                 });
             }
         };
@@ -47,6 +48,9 @@ angular.module("crmApp")
             .then(function(data) {
                 $scope.gridOptions.data = data;
             });
+
+        //initializing the products here so I can have access to the type-ahead
+        productsDataService.initProducts();
 
         var singleFilter = function( renderableRows ){
             var matcher = new RegExp($scope.data.searchText);
@@ -114,11 +118,12 @@ angular.module("crmApp")
         $location.path('/addcontact');
     }
 
-    selectedOpp = function (opp) {
+    this.selectedOpp = function (opp) {
         quotesService.quotes.length = 0;
-        for(var i = 0; i < this.gridOptions.data.length; i++) {
-            if (this.gridOptions.data[i]['q_id'] == opp.q_id) {
-                quotesService.quotes.push(this.gridOptions.data[i]);
+        for(var i = 0; i < $scope.gridOptions.data.length; i++) {
+            if ($scope.gridOptions.data[i].id == opp.id) {
+                quotesService.quotes.push($scope.gridOptions.data[i]);
+                break;
             }
         }
 
@@ -132,7 +137,7 @@ angular.module("crmApp")
         }
 
         quotesService.addMode = false;
-        $location.path('/quotes/' + opp.q_id);
+        $location.path('/productquotes/' + opp.product_id + '/' + opp.id);
     };
 }]);
 
