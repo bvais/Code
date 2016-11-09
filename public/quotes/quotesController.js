@@ -54,7 +54,11 @@ angular.module("crmApp")
                 .catch(function(err) {
                     toastr.error('Error: creating ' + $scope.quote.partno + ' ' + err);
                     $location.path('/opps');
-                }) ;
+                }).
+                finally(function () {
+                    quotesService.addMode = false;
+                }
+            )
         };
 
         $scope.addComment = function () {
@@ -67,6 +71,7 @@ angular.module("crmApp")
         };
 
         $scope.cancelQuote = function () {
+            quotesService.addMode = false;
             $location.path('/opps');
         }
 

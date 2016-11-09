@@ -23,11 +23,9 @@ angular.module('crmApp')
         return $http.post('/quote', quote)
             .then(function(data) {
                 quote.id = data.data.insertId;
-                quotesService.addMode = false;
                 quotes.push(quote);
             })
             .catch(function(err) {
-                quotesService.addMode = false;
                 throw err;
             });
     }

@@ -21,8 +21,8 @@ quoteRouter.route('/')
             compile({'product_id': req.body['product_id'],
                 'contact_id': req.body['contact_id'],
                 'condition': req.body['condition'],
-                'quantity': req.body['quantity'],
-                'price': req.body['price'],
+                'quantity': req.body['quantity'] != null ? req.body['quantity'] : 0,
+                'price': req.body['price'] != null ? req.body['price'] : 0,
                 'type': req.body['type']}) + ");";
 
         conn.query(query,
