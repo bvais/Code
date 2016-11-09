@@ -31,9 +31,7 @@ angular.module("crmApp")
                 {field: 'price', enableColumnMenu: false, cellFilter: 'currency'},
                 {field: 'date', enableColumnMenu: false},
                 {field: 'pin', enableColumnMenu: false},
-                {field: 'leadtime', enableColumnMenu: false},
-                {field: ' ', enableColumnMenu: false,
-                    cellTemplate: '<div style="text-align:center;" class="ui-grid-cell-contents"><a href="#/quote/{{row.entity.id}}">View</a></div>'}
+                {field: 'leadtime', enableColumnMenu: false}
             ],
             onRegisterApi: function( gridApi ) {
                 $scope.serviceGridApi = gridApi;
