@@ -32,17 +32,6 @@ angular.module('crmApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'ui.grid', 'ui.
 angular.module('crmApp')
     .service('activePageService', ['$location', 'quotesService', function ($location, quotesService) {
     this.activePage = 'Quotes';
-
-    this.redirect = function(contact) {
-        if (this.activePage == 'Quotes') {
-            quotesService.currentContact = contact;
-            quotesService.addMode = true;
-            $location.path('/products');
-        }
-        else {
-            $location.path('/contacts');
-        }
-    }
 }]);
 
 toastr.options = {

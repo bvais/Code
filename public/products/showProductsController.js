@@ -9,6 +9,8 @@ angular.module("crmApp")
 
         $scope.currentPage = 1;
         $scope.data = {};
+        $scope.currentContact = quotesService.currentContact;
+        $scope.addMode = quotesService.addMode;
         $scope.columns = [
             {field: 'id', visible: false},
             { field: 'part_number', enableColumnMenu: false },

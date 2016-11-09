@@ -33,18 +33,31 @@ angular.module('crmApp')
             return autoCompleteService.querySearch(contactsDataService.getContacts(), query, 'name');
     };
 
+    $scope.redirect = function () {
+        if (quotesService.addMode) {
+            quotesService.currentContact = $scope.contact;
+            $location.path('/products');
+        }
+        else $location.path('/contacts');
+    };
+
 
     $scope.addContact = function() {
         if ($scope.contact.id > 0) {
+            //show the success notification
             toastr.success('Selected ' + $scope.contact.name);
-            activePageService.redirect($scope.contact);
+
+            //and redirect
+            $scope.redirect();
         }
         else {
             contactsDataService.addContact($scope.contact)
                 .then(function (data) {
+                    //show the success notification
                     toastr.success('Created ' + $scope.contact.name);
-                    activePageService.redirect($scope.contact);
 
+                    //and redirect
+                    $scope.redirect();
                 })
                 .catch(function (err) {
                     toastr.error('Error: creating ' + $scope.contact.name + ' ' + err);
@@ -56,11 +69,14 @@ angular.module('crmApp')
         contactsDataService.editContact($scope.contact)
             .then(function(data) {
                 toastr.success('Updated ' + $scope.contact.name);
-                activePageService.redirect($scope.contact);
+                $scope.redirect();
             })
             .catch(function(err) {
                 toastr.error('Error: updating ' + $scope.contact.name + ' ' + err);
-                activePageService.redirect($scope.contact);
+
+                //in case of error get out of addMode
+                quotesService.addMode = false;
+                $scope.redirect();
             });
     };
 

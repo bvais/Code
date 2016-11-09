@@ -2,6 +2,9 @@
     <div class="container">
         <div class="row mainGrid">
             <div class="form-group col-md-10" style="padding: 0px;">
+                <div ng-if="addMode">
+                    <a href="#/editcontact/{{currentContact.id}}">Talking to {{currentContact.name}}</a>
+                </div>
                 <form ng-submit="search()">
 
                     <div layout="row">

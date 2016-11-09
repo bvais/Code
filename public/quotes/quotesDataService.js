@@ -27,7 +27,8 @@ angular.module('crmApp')
                 quotes.push(quote);
             })
             .catch(function(err) {
-
+                quotesService.addMode = false;
+                throw err;
             });
     }
 

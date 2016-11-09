@@ -21,7 +21,11 @@ angular.module("crmApp")
             $http.get('/quote/product/' + $scope.currentProduct.id)
                 .success(function (data) {
                     //reset the quotes
-                    quotesService.quotes = data;
+                    quotesService.quotes.length = 0;
+
+                    for(var i = 0; i < data.length; i++) {
+                        quotesService.quotes.push(data[i]);
+                    }
                 }
             );
         }
@@ -43,9 +47,14 @@ angular.module("crmApp")
 
             quotesDataService.addQuote($scope.quote)
                 .then(function(data) {
+                    toastr.success('Created ' + $scope.quote.partno);
                     $scope.quote = {};
                     $location.path('/opps');
-                });
+                })
+                .catch(function(err) {
+                    toastr.error('Error: creating ' + $scope.quote.partno + ' ' + err);
+                    $location.path('/opps');
+                }) ;
         };
 
         $scope.addComment = function () {

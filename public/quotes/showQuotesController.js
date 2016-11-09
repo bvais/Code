@@ -116,7 +116,7 @@ angular.module("crmApp")
     $scope.addQuote = function() {
         quotesService.addMode = true;
         $location.path('/addcontact');
-    }
+    };
 
     this.selectedOpp = function (opp) {
         quotesService.quotes.length = 0;

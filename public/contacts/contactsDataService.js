@@ -30,7 +30,7 @@ angular.module('crmApp')
                 contacts.push(contact);
             })
             .catch(function(err) {
-
+                throw err;
             });
     }
 

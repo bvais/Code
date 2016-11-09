@@ -1,4 +1,4 @@
-<div class="row" ng-controller="quotesController">
+<div class="row" ng-controller="quotesController" ng-cloak>
     <div class="col-md-10 col-md-offset-1">
         <div class="col-md-6" style="padding-top: 30px">
             <div class="panel panel-default">
@@ -89,7 +89,7 @@
             <h4 class="text-center">Our quote</h4>
             <md-input-container class="md-block">
                 <label>Quote Type</label>
-                <md-select name="type" ng-model="quote.type" >
+                <md-select name="type" ng-model="quote.type" required>
                     <md-option value="CRFQ">Client RFQ</md-option>
                     <md-option value="COFF">Client Offer</md-option>
                     <md-option value="VRFQ">Vendor RFQ</md-option>
@@ -104,7 +104,7 @@
 
                 <md-input-container flex="50">
                     <label>Condition</label>
-                    <md-select name="condition" ng-model="quote.condition" >
+                    <md-select name="condition" ng-model="quote.condition" required>
                         <md-option value="AR">AR</md-option>
                         <md-option value="SV">SV</md-option>
                         <md-option value="OH">OH</md-option>
@@ -150,7 +150,7 @@
             <div layout="row">
                 <md-input-container flex="50">
                     <label>Quantity</label>
-                    <input type="number" name="pinlen" ng-model="quote.quantity">
+                    <input type="number" name="pinlen" ng-model="quote.quantity" required>
                 </md-input-container>
                 <md-input-container flex="50">
                     <label>Pin length</label>
